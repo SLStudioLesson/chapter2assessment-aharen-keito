@@ -63,6 +63,25 @@ public class RecipeUI {
      */
     private void displayRecipes() {
 
+        int beginIndex;
+        RecipeFileHandler recipi = new RecipeFileHandler();
+        ArrayList a = recipi.readRecipes();
+
+        try {
+            beginIndex = 11;
+            String sub =  .substring(beginIndex);
+            if (!(a.isEmpty())) {
+                for (int i = 0; i < a.size(); i++) {
+                    System.out.println("---------------");
+                    System.out.println(beginIndex);
+                    System.out.println("");
+                }
+                System.out.println("No recipes available.");
+            }else{
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -86,4 +105,3 @@ public class RecipeUI {
     }
 
 }
-
