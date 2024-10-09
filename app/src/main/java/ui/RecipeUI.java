@@ -82,7 +82,7 @@ public class RecipeUI {
                         String join = String.join(",", Arrays.copyOfRange(strs, 1, strs.length));
                         System.out.println("---------------");
                         System.out.println("Recipi Name: " + name);
-                        System.out.println("Main Ingre: " + join);
+                        System.out.println("Main Ingredients: " + join);
                         System.out.println("");
                     }
                 }

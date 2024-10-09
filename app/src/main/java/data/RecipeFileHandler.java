@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class RecipeFileHandler {
@@ -37,13 +36,9 @@ public class RecipeFileHandler {
 
                 array.add(line);
                 line.split(",");
-                System.out.println(line);
             }
         } catch (IOException e) {
             System.out.println("Error reading file:" + e.getMessage());
-        }
-        for (String str : array) {
-            System.out.println(str);
         }
         return array;
     }
@@ -56,7 +51,7 @@ public class RecipeFileHandler {
      * @param recipeName  レシピ名
      * @param ingredients 材料名
      */
-    //
+    
     public void addRecipe(String recipeName, String ingredients) throws IOException {
         String fileName = "app/src/main/resources/recipes.txt";
 
