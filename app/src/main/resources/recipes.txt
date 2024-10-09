@@ -18,3 +18,8 @@ BBQ Ribs,Pork Ribs, BBQ Sauce, Garlic, Brown Sugar
 Vegetable Soup,Carrots, Potatoes, Celery, Tomato, Vegetable Stock
 Macaroni and Cheese,Macaroni, Cheddar Cheese, Milk, Butter, Flour
 Banana Bread,Bananas, Flour, Sugar, Baking Soda, Eggs
+Enter recipe name: aa,Enter main ingredients (comma separated): ssaaa,aaa,aaa,aaa,aaa,aaa,aaaabcd,efg,hijk,lmn,opqrstu
+asdfghjkl,asdfghjytrdsdasdfghjhg,asd,asdfg,werghnb,sdfghtd,sdfghchoice,choiceqqqqq,ggggggggggggg,ooo,vv,ghfdsasllll,oooaaaaaaa,ssssssssaaaaa,ppppp,ooooo
+d,d,d
+g,g,g
+ffff,lllll,ooooooo,pppppp

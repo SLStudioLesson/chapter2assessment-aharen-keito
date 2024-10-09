@@ -1,9 +1,11 @@
 package ui;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import data.RecipeFileHandler;
 
@@ -36,13 +38,13 @@ public class RecipeUI {
 
                 switch (choice) {
                     case "1":
-                        // 設問1: 一覧表示機能
+                        displayRecipes();
                         break;
                     case "2":
-                        // 設問2: 新規登録機能
+                        addNewRecipe();
                         break;
                     case "3":
-                        // 設問3: 検索機能
+                        searchRecipe();
                         break;
                     case "4":
                         System.out.println("Exit the application.");
@@ -53,7 +55,10 @@ public class RecipeUI {
                 }
             } catch (IOException e) {
                 System.out.println("Error reading input from user: " + e.getMessage());
+            } finally {
+
             }
+
         }
     }
 
@@ -63,24 +68,29 @@ public class RecipeUI {
      */
     private void displayRecipes() {
 
-        int beginIndex;
         RecipeFileHandler recipi = new RecipeFileHandler();
-        ArrayList a = recipi.readRecipes();
+        ArrayList<String> recipies = recipi.readRecipes();
+        if (!(recipies.isEmpty())) {
+            try {
+                for (int i = 0; i < recipies.size(); i++) {
+                    String re = recipies.get(i);
+                    String[] strs = re.split(",");
 
-        try {
-            beginIndex = 11;
-            String sub =  .substring(beginIndex);
-            if (!(a.isEmpty())) {
-                for (int i = 0; i < a.size(); i++) {
-                    System.out.println("---------------");
-                    System.out.println(beginIndex);
-                    System.out.println("");
+                    if (strs.length > 1) { // 分割チェック
+                        String name = strs[0].trim();
+                        // Arrays.copyOfRange 指定した箇所 配列の1番目の要素から最後の要素
+                        String join = String.join(",", Arrays.copyOfRange(strs, 1, strs.length));
+                        System.out.println("---------------");
+                        System.out.println("Recipi Name: " + name);
+                        System.out.println("Main Ingre: " + join);
+                        System.out.println("");
+                    }
                 }
-                System.out.println("No recipes available.");
-            }else{
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("No recipes available.");
         }
     }
 
@@ -91,7 +101,16 @@ public class RecipeUI {
      * @throws java.io.IOException 入出力が受け付けられない
      */
     private void addNewRecipe() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.println("Enter recipe name: ");
+        String addName = br.readLine();
+
+        System.out.println("Enter main ingredients (comma separated): ");
+        String addIngred = br.readLine();
+
+        RecipeFileHandler r = new RecipeFileHandler();
+        r.addRecipe(addName, addIngred);
     }
 
     /**
@@ -102,6 +121,41 @@ public class RecipeUI {
      */
     private void searchRecipe() throws IOException {
 
+        String fileName = "app/src/main/resources/recipes.txt";
+
+        // RecipeUI ui = new RecipeUI();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String serch = br.readLine();
+        String addName = br.readLine();
+        String addIngred = br.readLine();
+
+        try (BufferedReader br2 = new BufferedReader(new FileReader(fileName))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                // 行内に検索単語が含まれているかチェック
+                if (line.contains(addName) || line.contains(addIngred)) {
+                    String so = line;
+                    System.out.println(so);
+                }
+            }
+            
+
+        } catch (IOException e) {
+            System.out.println("No recipes found matching the criteria. ");
+        }
+
     }
 
 }
+/*
+ * 検索クエリはnameとingredientのキーをサポートし、&で複数の条件を組み合わせることができる。
+ * 
+ * 例: name=Soup&ingredient=Tomatoは、名前に"Soup"を含み、材料に"Tomato"を含むレシピを検索する。
+ * 一致するレシピがある場合は、そのレシピの名前と主な材料を表示する。
+ * 
+ * 一致するレシピがない場合は、No recipes found matching the criteria.と出力する。
+ * 
+ * 表示形式は以下の出力例を再現すること
+ */
